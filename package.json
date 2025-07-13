@@ -1,15 +1,31 @@
 {
   "name": "projeto-devweb25.1",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "dev": "npm run services:up && NODE_ENV=development npx tsx src/index.ts",
+    "services:up": "docker compose up -d",
+    "services:stop": "docker compose stop",
+    "services:down": "docker compose down",
+    "services:restart": "docker compose up --force-recreate -d"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0"
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.2",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.13",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
   }
 }
