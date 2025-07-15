@@ -1,6 +1,7 @@
 import express from "express";
-import sequelize from "./config/database";
-import { UserRepository } from "./repository/UserRepository";
+import sequelize from "./config/database.ts";
+import { UserRepository } from "./repository/UserRepository.ts";
+import status from "./services/status.ts";
 
 const port = 3000;
 const app = express();
@@ -13,10 +14,21 @@ app.post("/users", async (req, res) => {
     const { name, email, password } = req.body;
     const user = await userRepo.createUser(name, email, password);
     res.json(user);
-  } catch (error) {
+  } catch (error: any) {
     res
       .status(500)
       .json({ message: "Erro ao criar o usuário", error: error.message });
+  }
+});
+
+app.get("/status", async (req, res) => {
+  try {
+    let response = await status();
+    res.status(200).json(response);
+  } catch (error: any) {
+    res
+      .status(500)
+      .json({ message: "Erro ao buscar status", error: error.message });
   }
 });
 
