@@ -21,6 +21,17 @@ app.post("/users", async (req, res) => {
   }
 });
 
+app.get("/users", async (req, res) => {
+  try {
+    const users = await userRepo.getAllUsers();
+    res.json(users);
+  } catch (error: any) {
+    res
+      .status(500)
+      .json({ message: "Erro ao buscar usuários", error: error.message });
+  }
+});
+
 app.get("/status", async (req, res) => {
   try {
     let response = await status();
