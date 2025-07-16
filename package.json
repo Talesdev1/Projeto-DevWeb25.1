@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "NODE_ENV=development nodemon --exec tsx src/index.ts",
+    "start:dev": "NODE_ENV=development tsx src/index.ts",
+    "start:watch": "NODE_ENV=development nodemon --exec tsx src/index.ts",
     "dev": "npm run services:up && NODE_ENV=development nodemon --exec tsx src/index.ts",
     "services:up": "docker compose up -d",
     "services:stop": "docker compose stop",

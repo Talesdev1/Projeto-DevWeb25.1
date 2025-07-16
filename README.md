@@ -14,3 +14,17 @@ Cada usuário pode criar postagens sobre diferentes assuntos e ideias. Na home, 
 ## Para quem faz?
 
 para web
+
+## Para rodar o projeto
+
+### Subir o banco de dados
+
+`npm run services:up`
+
+### Rodar a api
+
+`npm run start:dev`
+
+### Rodar testes
+
+`npm run test`
