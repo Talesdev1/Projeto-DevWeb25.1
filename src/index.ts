@@ -1,7 +1,7 @@
 import express from "express";
-import sequelize from "./config/database.ts";
-import { UserRepository } from "./repository/UserRepository.ts";
-import status from "./services/status.ts";
+import sequelize from "./config/database.js";
+import { UserRepository } from "./repository/UserRepository.js";
+import status from "./services/status.js";
 
 const port = 3000;
 const app = express();
