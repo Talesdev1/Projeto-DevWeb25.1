@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 import * as dotenv from "dotenv";
 
 dotenv.config({
-  path: `/workspaces/Projeto-DevWeb25.1/.env.${process.env.NODE_ENV}`,
+  path: [".env.development"],
 });
 
 const sequelize = new Sequelize({

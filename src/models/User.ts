@@ -4,15 +4,18 @@ import { timeStamp } from "console";
 
 interface UserAttributes {
   id: number;
-  name: string;
+  username: string;
   email: string;
   password: string;
+  role: string;
 }
+
 export class User extends Model<UserAttributes, any> implements UserAttributes {
   public id!: number;
-  public name!: string;
+  public username!: string;
   public email!: string;
   public password!: string;
+  public role!: string;
 }
 
 User.init(
@@ -22,7 +25,7 @@ User.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -35,10 +38,14 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: "user",
+    },
   },
   {
     sequelize,
     tableName: "users",
-    timestamps: false,
+    timestamps: true,
   }
 );

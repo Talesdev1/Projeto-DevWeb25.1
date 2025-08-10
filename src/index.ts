@@ -2,35 +2,17 @@ import express from "express";
 import sequelize from "./config/database.js";
 import { UserRepository } from "./repository/UserRepository.js";
 import status from "./services/status.js";
+import * as dotenv from "dotenv";
+import { userRouter } from "./routes/userRouter.js";
+import { errorHandler } from "./middlewares/error.js";
+import { logger } from "./middlewares/logger.js";
 
 const port = 3000;
 const app = express();
 app.use(express.json());
-
-const userRepo = new UserRepository();
-
-app.post("/users", async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-    const user = await userRepo.createUser(name, email, password);
-    res.json(user);
-  } catch (error: any) {
-    res
-      .status(500)
-      .json({ message: "Erro ao criar o usuário", error: error.message });
-  }
-});
-
-app.get("/users", async (req, res) => {
-  try {
-    const users = await userRepo.getAllUsers();
-    res.json(users);
-  } catch (error: any) {
-    res
-      .status(500)
-      .json({ message: "Erro ao buscar usuários", error: error.message });
-  }
-});
+app.use(logger);
+app.use(errorHandler);
+app.use("/", userRouter);
 
 app.get("/status", async (req, res) => {
   try {
@@ -41,6 +23,10 @@ app.get("/status", async (req, res) => {
       .status(500)
       .json({ message: "Erro ao buscar status", error: error.message });
   }
+});
+
+app.get("*", (req, res) => {
+  res.status(505).json({ message: "Bad Request" });
 });
 
 sequelize

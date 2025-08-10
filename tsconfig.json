@@ -3,10 +3,11 @@
     "target": "esnext",
     "module": "nodenext",
     "declaration": true,
-    "outDir": "./lib",
+    "outDir": "./build",
     "strict": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
+  "typeRoots": ["./node_modules/@types"],
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*"]
 }
