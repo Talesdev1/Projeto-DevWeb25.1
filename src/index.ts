@@ -11,7 +11,6 @@ const port = 3000;
 const app = express();
 app.use(express.json());
 app.use(logger);
-app.use(errorHandler);
 app.use("/", userRouter);
 
 app.get("/status", async (req, res) => {
@@ -25,9 +24,21 @@ app.get("/status", async (req, res) => {
   }
 });
 
+app.get("/test/sync", async (req, res) => {
+  await sequelize.sync({ force: true }).catch((error) => {
+    console.error("Erro ao resetar banco de dados", error);
+    res
+      .status(500)
+      .json({ message: "Erro ao buscar status", error: error.message });
+  });
+  res.status(204).json();
+});
+
 app.get("*", (req, res) => {
   res.status(505).json({ message: "Bad Request" });
 });
+
+app.use(errorHandler);
 
 sequelize
   .sync({ force: true })
