@@ -5,6 +5,8 @@ import { PostController } from "../controllers/postController.js";
 
 const Router = express.Router();
 
+Router.get("/posts/", PostController.getPosts);
+Router.get("/posts/:userId", PostController.getUserPosts);
 Router.get("/post/:id", PostController.getPost);
 Router.post(
   "/posts",
@@ -18,4 +20,4 @@ Router.delete(
   authorization(["user", "admin"]),
   PostController.deletePost
 );
-export { Router as userRouter };
+export { Router as postRouter };

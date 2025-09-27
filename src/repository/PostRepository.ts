@@ -9,6 +9,10 @@ export class PostRepository {
     return await Post.findAll();
   }
 
+  async getAllUserPosts(userId: number) {
+    return await Post.findAll({ where: { ownerId: userId } });
+  }
+
   async getPostById(id: number) {
     return await Post.findOne({ where: { id: id } });
   }

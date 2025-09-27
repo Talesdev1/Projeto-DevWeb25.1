@@ -10,7 +10,6 @@ export class UserController {
   static async signup(req: Request, res: Response, next: NextFunction) {
     try {
       const { username, email, password, confirm_password } = req.body;
-      console.log(email);
       if (!password) {
         throw new BaseError({ type: "is_null", path: "senha" });
       }
@@ -29,7 +28,7 @@ export class UserController {
       );
       const userResponce = new UserResponce(user.toJSON());
 
-      const token = encrypt.generateToken({ id: user.id });
+      const token = encrypt.generateToken({ id: user.getDataValue("id") });
 
       return res.status(201).json({ token, ...userResponce.toJSON() });
     } catch (error) {

@@ -17,7 +17,7 @@ export const errorHandler = (
   }
 
   if (!(error instanceof BaseError)) {
-    error = new BaseError(error.type);
+    error = new BaseError({ type: error?.type, message: error.message });
   }
   console.error("Error: ", error.message);
   return res.status(error.statusCode).json({ message: error.message });

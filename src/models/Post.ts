@@ -29,9 +29,13 @@ export class Post extends Model<PostAttributes, any> implements PostAttributes {
 Post.init(
   {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    ownerId: { type: DataTypes.INTEGER, allowNull: false },
+    ownerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: { model: User, key: "id" },
+    },
     title: { type: DataTypes.STRING, allowNull: false },
-    body: { type: DataTypes.STRING, allowNull: false },
+    body: { type: DataTypes.TEXT, allowNull: false },
     status: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -43,10 +47,10 @@ Post.init(
       references: { model: Post, key: "id" },
     },
     ownerUsername: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       references: { model: User, key: "username" },
     },
-    deleted: { type: DataTypes.BOOLEAN },
+    deleted: { type: DataTypes.BOOLEAN, defaultValue: false },
   },
   { sequelize, tableName: "posts", timestamps: true }
 );

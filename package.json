@@ -7,7 +7,7 @@
   "scripts": {
     "start:dev": "concurrently \"tsc -w\" \"NODE_ENV=development nodemon build/index.js\"",
     "start:watch": "NODE_ENV=development nodemon --exec tsx src/index.ts",
-    "dev": "npm run services:up && NODE_ENV=development nodemon --exec tsx src/index.ts",
+    "dev": "npm run services:up && NODE_ENV=development tsx src/index.ts",
     "services:up": "docker compose up -d",
     "services:stop": "docker compose stop",
     "services:down": "docker compose down",
@@ -22,6 +22,7 @@
     "@types/cors": "^2.8.19",
     "bcrypt": "^6.0.0",
     "concurrently": "^9.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.0",
     "express": "^4.20.0",
     "jsonwebtoken": "^9.0.2",

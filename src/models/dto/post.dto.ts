@@ -29,15 +29,15 @@ export class PostResponce {
     return {
       id: this.id,
       deleted: this.deleted,
-      ownerId: this.ownerId,
-      ownerUsername: this.ownerUsername,
-      parentId: this.parentId,
+      owner_id: this.ownerId,
+      owner_username: this.ownerUsername,
+      parent_id: this.parentId,
       title: this.title,
       body: this.body,
       status: this.status,
       type: this.type,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
+      created_at: this.createdAt,
+      updated_at: this.updatedAt,
     };
   }
 }
